@@ -5,9 +5,16 @@ import youtube from './api/youtube';
 import { SearchBar, VideoDetail } from './components'
 
 class App extends React.Component {
+    state = {
+        video: [],
+        selectedVideo: null,
+    }
+
     handleSubmit = async (searchTerm) => {
         const response = await youtube.get('search', { params: {q: searchTerm}});
         console.log(response.data.items);
+
+        this.setState({ videos: response.data.items, selectedVideo: response.data.items[0] });
     }
 
     render() {
