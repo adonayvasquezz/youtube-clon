@@ -1,5 +1,4 @@
-import React from 'react';
-import { Paper, Typography, typography } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 
 const VideoDetail = ({ video }) => {
     if (!video) return <div>Loading...</div>
