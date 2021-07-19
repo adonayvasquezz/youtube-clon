@@ -2,14 +2,15 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import youtube from './api/youtube';
 import logo from './images/youtube-logo.png';
-import menuIcon from './images/menu.png'
+import menuIcon from './images/menu.png';
 
-import { SearchBar, VideoDetail, VideoList } from './components'
+import { SearchBar, VideoDetail, VideoList, Comments } from './components'
 
 class App extends React.Component {
     state = {
         videos: [],
         selectedVideo: null,
+        comments: []
     }
 
     componentDidMount() {
@@ -22,13 +23,14 @@ class App extends React.Component {
 
     handleSubmit = async (searchTerm) => {
         const response = await youtube.get('search', { params: {q: searchTerm}});
+        const commentsList = await youtube.get('commentThreads', { params: {videoId: response.data.items[0].id.videoId}});
         console.log(response.data.items);
-
-        this.setState({ videos: response.data.items, selectedVideo: response.data.items[0] });
+        console.log('comentarios ',commentsList.data.items);
+        this.setState({ videos: response.data.items, selectedVideo: response.data.items[0], comments:commentsList.data.items });
     }
 
     render() {
-        const { selectedVideo, videos } = this.state;
+        const { selectedVideo, videos, comments } = this.state;
         const css = {
             flexAlign: {
                 display:'flex',
@@ -67,13 +69,19 @@ class App extends React.Component {
                 </Grid>
 
                 <Grid container style={css.layout}>
-                    <Grid item xs={12} md={9} style={{width:'100%'}}>
+                    <Grid item xs={12} md={8} lg={8} style={{width:'100%', height:'70vh'}}>
                         <VideoDetail video={selectedVideo} />
+                        <Grid container>
+                            <Grid item xs={12} md={12}>
+                                <Comments comments={comments} />
+                            </Grid>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} md={3} style={css.videoList}>
+                    <Grid item xs={12} md={4} lg={4} style={css.videoList}>
                         <VideoList videos={videos} onVideoSelect={this.onVideoSelect} />
                     </Grid>
                 </Grid>
+                
                 
             </div>
         )

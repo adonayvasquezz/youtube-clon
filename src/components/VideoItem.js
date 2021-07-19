@@ -1,4 +1,4 @@
-import { Paper, Typography, Grid } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 
 const VideoItem = ({ video, onVideoSelect }) => {
     const css = {
@@ -13,11 +13,11 @@ const VideoItem = ({ video, onVideoSelect }) => {
         },
         videoTitle: {
             paddingLeft:'0.4rem',
-            fontSize:'1rem'
+            fontSize:'0.8rem'
         },
         videoChannel: {
             display:"block",
-            fontSize: '0.8rem',
+            fontSize: '0.6rem',
             fontWeight: '400',
             paddingTop: '0.2rem'
         }
@@ -28,7 +28,7 @@ const VideoItem = ({ video, onVideoSelect }) => {
             <Paper style={css.paper} onClick={()=>onVideoSelect(video)}>
                 <img style={css.videoImg} alt='thumbnail' src={video.snippet.thumbnails.medium.url} />
                 <h5 style={css.videoTitle}>{video.snippet.title}
-                <label style={css.videoChannel}>{video.snippet.channelTitle}</label>
+                    <label style={css.videoChannel}>{video.snippet.channelTitle}</label>
                 </h5>
                 
             </Paper>

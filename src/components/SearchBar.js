@@ -23,6 +23,7 @@ class SearchBar extends React.Component {
                 padding:'0rem 1rem',
                 border: '1.5px solid #D3D3D3',
                 borderLeft: 'none',
+                cursor:'pointer',
                 
                "&:hover": {
                 background: "#efefef"
