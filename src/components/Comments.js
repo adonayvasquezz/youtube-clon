@@ -1,14 +1,10 @@
+import CommentDetail from "./CommentDetail";
 
 const Comments = ({comments}) => {
     var commentList = [];
-    const css = {
-        comment: {
-            padding:'2rem'
-        }
-    }
-
+   
     if (comments !== []) {
-        commentList = comments.map((com, id) => <div style={css.comment} key={id} dangerouslySetInnerHTML={{__html:com.snippet.topLevelComment.snippet.textDisplay}}></div>
+        commentList = comments.map((com, id) => <CommentDetail key={id} commentData={com}  />
         );
     }
    

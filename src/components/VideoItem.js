@@ -12,8 +12,10 @@ const VideoItem = ({ video, onVideoSelect }) => {
             marginTop:'0.5rem'
         },
         videoTitle: {
+            display:'block',
             paddingLeft:'0.4rem',
-            fontSize:'0.8rem'
+            fontSize:'0.8rem',
+            
         },
         videoChannel: {
             display:"block",
@@ -23,13 +25,13 @@ const VideoItem = ({ video, onVideoSelect }) => {
         }
     }
     return (
-        <Grid>
-            
+        <Grid style={{minWidth:'100%'}}>
             <Paper style={css.paper} onClick={()=>onVideoSelect(video)}>
                 <img style={css.videoImg} alt='thumbnail' src={video.snippet.thumbnails.medium.url} />
-                <h5 style={css.videoTitle}>{video.snippet.title}
+                <div style={css.videoTitle}>
+                    <h5>{video.snippet.title}</h5>
                     <label style={css.videoChannel}>{video.snippet.channelTitle}</label>
-                </h5>
+                </div>
                 
             </Paper>
         </Grid>

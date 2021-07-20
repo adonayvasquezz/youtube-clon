@@ -24,8 +24,6 @@ class App extends React.Component {
     handleSubmit = async (searchTerm) => {
         const response = await youtube.get('search', { params: {q: searchTerm}});
         const commentsList = await youtube.get('commentThreads', { params: {videoId: response.data.items[0].id.videoId}});
-        console.log(response.data.items);
-        console.log('comentarios ',commentsList.data.items);
         this.setState({ videos: response.data.items, selectedVideo: response.data.items[0], comments:commentsList.data.items });
     }
 
