@@ -17,14 +17,21 @@ class App extends React.Component {
         //this.handleSubmit('nirvana');
     }
 
-    onVideoSelect = (video) => {
-        this.setState( {selectedVideo: video});
+    onVideoSelect = async (video) => {
+        const commentsList = await this.getComments(video.id.videoId);
+        this.setState( {selectedVideo: video, comments:commentsList.data.items});
     }
 
     handleSubmit = async (searchTerm) => {
         const response = await youtube.get('search', { params: {q: searchTerm}});
-        const commentsList = await youtube.get('commentThreads', { params: {videoId: response.data.items[0].id.videoId}});
+        const commentsList = await this.getComments(response.data.items[0].id.videoId);
         this.setState({ videos: response.data.items, selectedVideo: response.data.items[0], comments:commentsList.data.items });
+  
+    }
+
+    getComments = async (videoId) => {
+        const commentsList = await youtube.get('commentThreads', { params: {videoId: videoId}});
+        return commentsList;
     }
 
     render() {
